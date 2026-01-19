@@ -21,8 +21,6 @@ What you expected to happen.
 What actually happened.
 
 ## Environment
-- **OS:** (e.g., Windows 11, macOS 14, Ubuntu 22.04)
-- **Browser:** (e.g., Chrome 120, Firefox 121)
 - **Version:** (if applicable)
 
 ## Screenshots
