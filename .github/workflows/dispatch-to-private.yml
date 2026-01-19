@@ -1,0 +1,28 @@
+# This workflow runs in the PUBLIC issues repo
+# It triggers the private repo when a new bug is filed
+
+name: Dispatch Issue to Private Repo
+
+on:
+  issues:
+    types: [opened, labeled]
+
+jobs:
+  dispatch:
+    if: contains(github.event.issue.labels.*.name, 'bug')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Trigger Private Repo Workflow
+        uses: peter-evans/repository-dispatch@v3
+        with:
+          token: ${{ secrets.PRIVATE_REPO_TOKEN }}
+          repository: robedge/free-overlays
+          event-type: new-issue
+          client-payload: |
+            {
+              "issue_number": ${{ github.event.issue.number }},
+              "issue_title": ${{ toJson(github.event.issue.title) }},
+              "issue_body": ${{ toJson(github.event.issue.body) }},
+              "issue_url": "${{ github.event.issue.html_url }}",
+              "issue_author": "${{ github.event.issue.user.login }}"
+            }
