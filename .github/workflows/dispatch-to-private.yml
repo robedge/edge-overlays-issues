@@ -5,7 +5,7 @@ name: Dispatch Issue to Private Repo
 
 on:
   issues:
-    types: [opened, labeled]
+    types: [opened]
 
 jobs:
   dispatch:
